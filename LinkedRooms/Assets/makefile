@@ -1,4 +1,5 @@
 OPTS=-Wall -Wextra -Wno-unused-parameter -Wno-unused-variable -Wno-unused-but-set-variable -Werror -std=c17 -Wpedantic -O0 -g
+SETOPTS=-Wall -Wextra -Wno-unused-parameter -Wno-unused-variable -Wno-unused-but-set-variable -Werror -std=c17 -Wpedantic -O0
 
 
 all: LinkedRooms
@@ -10,4 +11,7 @@ backrooms.o: backrooms.c Lists.h
 	gcc $< -c -o $@ $(OPTS)
 
 Lists.o: Lists.c Lists.h
-	gcc $< -c -o $@ $(OPTS)
+	gcc $< -c -o $@ $(SETOPTS)
+
+clean:
+	rm -f *.o LinkedRooms
