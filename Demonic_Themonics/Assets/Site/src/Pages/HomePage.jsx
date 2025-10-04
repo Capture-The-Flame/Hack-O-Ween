@@ -12,8 +12,7 @@ function HomePage(){
     const themes = {
         Default:"",
         Light:"",
-        Scary:"",
-        Secret:""
+        Scary:""
     }
 
     return(
@@ -24,7 +23,7 @@ function HomePage(){
                 <ThemeOptions   
                     activeTheme={theme}
                     onThemeChange={setTheme}
-                    themes={themes}
+                    themes={Object.keys(themes)}
                 />
                 <EmbeddedDiv    
                     activeTheme={theme}

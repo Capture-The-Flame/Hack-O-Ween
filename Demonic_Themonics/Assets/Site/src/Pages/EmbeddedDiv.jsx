@@ -5,21 +5,33 @@ import {useState} from "react";
 const EmbeddedDiv = ({activeTheme, onThemeChange, themes}) =>{
     const themeDetails = {
         Default: {
-            details:"Hello"
+            details:"Hello",
+            Divs:{
+                
+            }
         },
         Light:{
-            details:"LIGHT"
+            details:"LIGHT",
+            Divs:{
+
+            }
         },
         Scary:{
-            details:"AAAAHH"
+            details:"AAAAHH",
+            Divs:{
+
+            }
         },
         Secret:{
-            details:"flame{DO0MI$C0MING}"
+            details:"flame{DO0MI$C0MING}",
+            Divs:{
+
+            }
         }
     };
     return(
         <div>
-            <p>{themeDetails[activeTheme].details}</p>
+            <p hidden>{themeDetails[activeTheme].details}</p>
         </div>
     )
 }
