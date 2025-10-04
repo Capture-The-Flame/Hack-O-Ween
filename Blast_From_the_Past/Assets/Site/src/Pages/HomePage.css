@@ -3,6 +3,7 @@
     height:100vh;
     width:100vw;
     overflow:hidden;
+    display: flex;
 }
 
 .backdrop{
@@ -16,4 +17,8 @@
 .mainDiv{
     z-index:1;
     position:relative;
+    background-color: rgba(128, 128, 128, 0.525);
+    width:20%;
+    height:20%;
+    border-radius: 50px;
 }

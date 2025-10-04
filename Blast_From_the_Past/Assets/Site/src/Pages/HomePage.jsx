@@ -2,14 +2,36 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import Backdrop from "./Photos/backdrop.jpg";
 import "./HomePage.css";
+import {useState} from "react";
+import EmbeddedDiv from "./EmbeddedDiv";
+import ThemeOptions from "./ThemeOptions";
 
 function HomePage(){
+    const [theme,setTheme]=useState('Default');
+
+    const themes = {
+        Default:"",
+        Light:"",
+        Scary:"",
+        Secret:""
+    }
+
     return(
         <div className="completeDiv">
             <img src={Backdrop} className="backdrop"/>
 
             <div className="mainDiv">
-                <p>Hello</p>
+                <ThemeOptions   
+                    activeTheme={theme}
+                    onThemeChange={setTheme}
+                    themes={themes}
+                />
+                <EmbeddedDiv    
+                    activeTheme={theme}
+                    onThemeChange={setTheme}
+                    themes={themes}
+                />
+
             </div>
         </div>
     )
