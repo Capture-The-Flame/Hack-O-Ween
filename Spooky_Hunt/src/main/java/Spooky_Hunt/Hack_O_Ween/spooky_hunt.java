@@ -17,13 +17,22 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class spooky_hunt extends Application {
-    Scene scene;
-    BorderPane root;
+    Scene startScene;
+    Scene questionScene;
+    BorderPane starterPane;
+    BorderPane questionPane;
+    Button startButton;
+    Button submitButton;
+    Text question;
+    TextField answerField;
 
     @Override
     public void start(Stage stage) {
-        BorderPane root = new BorderPane();
-        scene = new Scene(root, 500,700);
+        startButton = new Button();
+        startButton.setText("START");
+        starterPane = new BorderPane(startButton);
+        startScene = new Scene(starterPane, 700,600);
+        stage.setScene(startScene);
         stage.setTitle("Spooky_Hunt");
         stage.show();
     }
