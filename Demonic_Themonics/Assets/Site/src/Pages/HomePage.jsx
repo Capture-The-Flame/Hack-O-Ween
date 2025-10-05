@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Backdrop from "./Photos/backdrop.jpg";
+import Backdrop from "./Photos/backdrop.png";
 import "./HomePage.css";
 import {useState} from "react";
 import EmbeddedDiv from "./EmbeddedDiv";
