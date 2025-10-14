@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import {useState} from "react";
+import "./ThemeOptions.css";
 
 const ThemeOptions = ({activeTheme, onThemeChange, themes}) =>{
 

@@ -15,12 +15,23 @@ const EmbeddedDiv = ({activeTheme, onThemeChange, themes}) =>{
 
         const length = themeDetails[activeTheme].Divs.length;
         for(let j = 0; j<length-1;j++){
-            for(let i=0;i<100;i++){
+            for(let i=0;i<1000;i++){
                 const div = document.createElement("div");
                 const p = document.createElement("p");
-                if(i==75 && activeTheme=="Scary"){
-                    p.textContent="flame{D00MI$C0MING}";
-                    p.setAttribute("class","flag");
+                if(i>600 && i<900 && activeTheme=="Scary"){
+                    if(i==746){
+                        p.textContent="flame{D00MI$C0MING}";
+                        p.setAttribute("class","flag");
+                        p.setAttribute("id","flag");
+                    }
+                    else if (i%10!=0){
+                        p.textContent=themeDetails[activeTheme].Divs[j].details;
+                        p.setAttribute("class","flag");
+                    }
+                    else{
+                        p.textContent=themeDetails[activeTheme].Divs[j].details;
+                        p.setAttribute("id","flag");
+                    }
                 }
                 else
                     p.textContent=themeDetails[activeTheme].Divs[j].details;
