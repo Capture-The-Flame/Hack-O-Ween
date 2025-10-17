@@ -144,8 +144,8 @@ class Question_Round{
 
             Text questionArea = new Text(question);
             TextField answerBox = new TextField();
-            answerBox.setPrefWidth(500);
-            answerBox.setStyle("-fx-background-color:#394F3F;-fx-margin-left:50px;-fx-margin-right:50px;-fx-text-color:#000000;");
+            answerBox.setPrefWidth(300);
+            answerBox.setStyle("-fx-background-color:#394F3F;-fx-text-fill:#000000;");
 
             Button submit = new Button("Submit");
             submit.setStyle("-fx-background-color:#2D5155;");
@@ -162,7 +162,6 @@ class Question_Round{
                 //myers
                 case 0:
                     break;
-                    //witch
                 case 1:
                     Image gruntilda_image = new Image(getClass().getResource(gruntilda_path).toExternalForm());
                     ImageView gruntilda_view = new ImageView(gruntilda_image);
@@ -198,11 +197,10 @@ class Question_Round{
                 case 4:
                     Image bloody_banner_image = new Image(getClass().getResource(bloody_banner_path).toExternalForm());
                     ImageView bloody_banner_view = new ImageView(bloody_banner_image);
-                    bloody_banner_view.fitWidthProperty().bind(decoration.widthProperty());
+                    bloody_banner_view.setFitWidth(200);
                     bloody_banner_view.setFitHeight(200); 
                     bloody_banner_view.setPreserveRatio(false);
                     decoration.getChildren().add(bloody_banner_view);
-                    decoration.setAlignment(Pos.TOP_CENTER);
                     break;
                 default:
                     break;
@@ -211,7 +209,7 @@ class Question_Round{
 
             VBox Everything = new VBox(questionArea,answerBox, submit);
             Everything.setAlignment(Pos.CENTER);
-            answerBox.setMaxWidth(300);
+            answerBox.setMaxWidth(150);
             VBox.setVgrow(answerBox, Priority.NEVER);
             Everything.setSpacing(15);
 
