@@ -1,6 +1,8 @@
 package Spooky_Hunt.Hack_O_Ween;
 
 import java.util.Vector;
+
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -34,6 +36,7 @@ public class spooky_hunt extends Application {
     // String bloody_banner_path = "/Spooky_Hunt/Hack_O_Ween/blood-drip.gif";
     String pumpkin2_path = "/Spooky_Hunt/Hack_O_Ween/pumpkin_2.gif";
     // String spikey_path = "/Spooky_Hunt/Hack_O_Ween/spikey.png";
+    String backdrop = "/Spooky_Hunt/Hack_O_Ween/backdrop.jpg";
 
     static Scene congratsScene;
 
@@ -44,13 +47,16 @@ public class spooky_hunt extends Application {
         spooky_hunt.stage = stage;
         startButton = new Button();
         startButton.setText("START");
-        startButton.setStyle("-fx-border-radius:100px;-fx-width:40%;-fx-height:20%;-fx-background-color:red;-fx-padding:5%;");
+        startButton.setStyle("-fx-border-radius:100px;-fx-background-color:red;");
         startButton.setPrefWidth(200);
         startButton.setPrefHeight(80);
 
 
         Image pumpkin_cat = new Image(getClass().getResource(pumpkin1).toExternalForm());
         ImageView pumpkin_cat_view = new ImageView(pumpkin_cat);
+        pumpkin_cat_view.setFitHeight(300);
+        pumpkin_cat_view.setFitWidth(300);
+        pumpkin_cat_view.setPreserveRatio(true);
 
         Image banner = new Image(getClass().getResource(banner_path).toExternalForm());
         ImageView banner_view = new ImageView(banner);
@@ -58,11 +64,31 @@ public class spooky_hunt extends Application {
         VBox tmp = new VBox(banner_view, startButton);
         HBox cat_container = new HBox(pumpkin_cat_view);
         cat_container.setAlignment(Pos.BOTTOM_RIGHT);
+        cat_container.setMaxWidth(300);
+        cat_container.setMaxHeight(300);
+        VBox total = new VBox(tmp,cat_container);
         tmp.setAlignment(Pos.CENTER);
+        total.setAlignment(Pos.CENTER);
+
+        BackgroundImage background = new BackgroundImage(
+            new Image(getClass().getResource(backdrop).toExternalForm()),
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundPosition.CENTER,
+                    new BackgroundSize(100, 100, true, true, false, true)
+                );
+
+
+        StackPane stack = new StackPane();
+        stack.setBackground(new Background(background));
+
+        stack.getChildren().addAll(tmp, cat_container);
+        StackPane.setAlignment(cat_container, Pos.BOTTOM_RIGHT);
+
         starterPane = new BorderPane();
-        starterPane.setCenter(tmp);
-        starterPane.setBottom(cat_container);
-        starterPane.setStyle("-fx-background-color:darkred;");
+        starterPane.setCenter(stack);
+        // starterPane.setStyle("-fx-background-color:darkred;");
+
         startScene = new Scene(starterPane, 700,600);
 
         startButton.setOnAction(e->{
@@ -121,10 +147,16 @@ class Question_Round{
         private String Answer;
         private int roundNum;
         private Scene scene;
+        private String color;
         private String spikey_path = "/Spooky_Hunt/Hack_O_Ween/spikey.png";
         private String bloody_banner_path = "/Spooky_Hunt/Hack_O_Ween/bloody_drip.png";
         private String cute_gruntilda_path = "/Spooky_Hunt/Hack_O_Ween/pixel_art.png";
         private String gruntilda_path = "/Spooky_Hunt/Hack_O_Ween/gruntilda.png";
+        private String michael_path = "/Spooky_Hunt/Hack_O_Ween/michael.png";
+
+        private String carrie_backdrop = "/Spooky_Hunt/Hack_O_Ween/backdrop-blood.jpg";
+        private String spikey_backdrop = "/Spooky_Hunt/Hack_O_Ween/spikey-background.jpg";
+        private String jason_backdrop = "/Spooky_Hunt/Hack_O_Ween/crystal_lake.png";
 
         Question_Round(int roundNum){
             this.roundNum=roundNum;
@@ -143,6 +175,7 @@ class Question_Round{
         public void createScene(){
 
             Text questionArea = new Text(question);
+            questionArea.setStyle("-fx-fill:#FFFFFF");
             TextField answerBox = new TextField();
             answerBox.setPrefWidth(300);
             answerBox.setStyle("-fx-background-color:#394F3F;-fx-text-fill:#000000;");
@@ -156,11 +189,31 @@ class Question_Round{
                 }
             });
 
+            VBox Everything = new VBox(questionArea,answerBox, submit);
+            Everything.setAlignment(Pos.CENTER);
+            answerBox.setMaxWidth(150);
+            VBox.setVgrow(answerBox, Priority.NEVER);
+            Everything.setSpacing(20);
+            Everything.setMaxHeight(Region.USE_PREF_SIZE);
+            Everything.setMaxWidth(Region.USE_PREF_SIZE);
+
             VBox decoration = new VBox();
+            BorderPane inner = new BorderPane();
+            StackPane stack = new StackPane();
 
             switch(this.roundNum){
                 //myers
                 case 0:
+                    Image michaelImage = new Image(getClass().getResource(michael_path).toExternalForm());
+                    ImageView michael_view = new ImageView(michaelImage);
+                    michael_view.setFitHeight(350);
+                    michael_view.setFitWidth(700);
+                    decoration.getChildren().add(michael_view);
+                    color = "-fx-background-color:#0c2a2d;";
+                    stack.getChildren().addAll(decoration,Everything);
+                    StackPane.setAlignment(decoration, Pos.TOP_CENTER);
+                    StackPane.setAlignment(Everything,Pos.BOTTOM_CENTER);
+                    StackPane.setMargin(Everything, new Insets(0, 0, 50, 0));
                     break;
                 case 1:
                     Image gruntilda_image = new Image(getClass().getResource(gruntilda_path).toExternalForm());
@@ -175,51 +228,92 @@ class Question_Round{
                     cute_gruntilda_view.setFitHeight(200);    
                     cute_gruntilda_view.setPreserveRatio(true);
 
-                    HBox tmpor = new HBox(gruntilda_view,cute_gruntilda_view);
+                    HBox tmpor = new HBox(gruntilda_view);
                     tmpor.setAlignment(Pos.CENTER);
                     HBox.setHgrow(tmpor, Priority.NEVER);
                     decoration.getChildren().add(tmpor);
-                    decoration.setMaxWidth(100);
-                    decoration.setMaxHeight(100);
+                    decoration.setAlignment(Pos.TOP_CENTER);
+                    color="-fx-background-color:#2fa71c";
+                    stack.getChildren().addAll(decoration,Everything);
+                    StackPane.setAlignment(decoration, Pos.TOP_CENTER);
+                    StackPane.setAlignment(Everything,Pos.BOTTOM_CENTER);
+                    StackPane.setMargin(Everything, new Insets(0, 0, 50, 0));
                     break;
                     //friday
                 case 2:
+                    BackgroundImage background = new BackgroundImage(
+                        new Image(getClass().getResource(jason_backdrop).toExternalForm()),
+                        BackgroundRepeat.NO_REPEAT,
+                        BackgroundRepeat.NO_REPEAT,
+                        BackgroundPosition.CENTER,
+                        new BackgroundSize(100, 100, true, true, false, true)
+                    );
+                    stack.setBackground(new Background(background));
+                    stack.getChildren().addAll(decoration,Everything);
+                    StackPane.setAlignment(decoration, Pos.TOP_CENTER);
+                    Everything.setPadding(new Insets(20, 20, 20, 20));
+                    Everything.setStyle("-fx-background-color:#000000;-fx-border-radius:50px;-fx-border-color:black;-fx-border-width:2px;-fx-background-radius:50px");
                     break;
                     //spikey
                 case 3:
                     Image spikey_image = new Image(getClass().getResource(spikey_path).toExternalForm());
                     ImageView spikey_view = new ImageView(spikey_image);
+
+                    BackgroundImage spikey_background = new BackgroundImage(
+                        new Image(getClass().getResource(spikey_backdrop).toExternalForm()),
+                        BackgroundRepeat.NO_REPEAT,
+                        BackgroundRepeat.NO_REPEAT,
+                        BackgroundPosition.CENTER,
+                        new BackgroundSize(100, 100, true, true, false, true)
+                    );
+                    stack.setBackground(new Background(spikey_background));
                     
                     decoration.getChildren().add(spikey_view);
                     decoration.setAlignment(Pos.CENTER);
+                    color = "-fx-background-color:#000000;";
+                    stack.getChildren().addAll(decoration,Everything);
+                    StackPane.setAlignment(decoration, Pos.TOP_CENTER);
+                    StackPane.setAlignment(Everything,Pos.BOTTOM_CENTER);
+                    StackPane.setMargin(decoration, new Insets(0, 0, 200, 0));
+                    StackPane.setMargin(Everything, new Insets(0, 0, 50, 0));
+
                     break;
                     //carrie
                 case 4:
                     Image bloody_banner_image = new Image(getClass().getResource(bloody_banner_path).toExternalForm());
                     ImageView bloody_banner_view = new ImageView(bloody_banner_image);
-                    bloody_banner_view.setFitWidth(200);
-                    bloody_banner_view.setFitHeight(200); 
+
+                    BackgroundImage carrie_background = new BackgroundImage(
+                        new Image(getClass().getResource(carrie_backdrop).toExternalForm()),
+                        BackgroundRepeat.NO_REPEAT,
+                        BackgroundRepeat.NO_REPEAT,
+                        BackgroundPosition.CENTER,
+                        new BackgroundSize(100, 100, true, true, false, true)
+                    );
+                    stack.setBackground(new Background(carrie_background));
+
+                    bloody_banner_view.setFitWidth(700);
+                    bloody_banner_view.setFitHeight(100); 
                     bloody_banner_view.setPreserveRatio(false);
+                    decoration.setAlignment(Pos.TOP_CENTER);
                     decoration.getChildren().add(bloody_banner_view);
+                    color="-fx-background-color:#4D4247;";
+                    stack.getChildren().addAll(decoration,Everything);
+                    StackPane.setAlignment(decoration, Pos.TOP_CENTER);
+                    Everything.setPadding(new Insets(20, 20, 20, 20));
+                    Everything.setStyle("-fx-background-color:#000000;-fx-border-radius:50px;-fx-border-color:black;-fx-border-width:2px;-fx-background-radius:50px");
                     break;
                 default:
+                    color="-fx-background-color:pink;";
                     break;
             }
 
 
-            VBox Everything = new VBox(questionArea,answerBox, submit);
-            Everything.setAlignment(Pos.CENTER);
-            answerBox.setMaxWidth(150);
-            VBox.setVgrow(answerBox, Priority.NEVER);
-            Everything.setSpacing(15);
+            // inner.setTop(decoration);
+            inner.setCenter(stack);
+            inner.setStyle(color);
 
-
-            BorderPane inner = new BorderPane();
-            inner.setTop(decoration);
-            inner.setCenter(Everything);
-           inner.setStyle("-fx-background-color:#263F42;");
-
-            BorderPane.setAlignment(Everything,Pos.CENTER);
+            // BorderPane.setAlignment(Everything,Pos.CENTER);
             
             this.scene = new Scene(inner,700,600);
 
