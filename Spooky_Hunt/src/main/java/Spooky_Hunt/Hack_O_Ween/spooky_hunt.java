@@ -36,9 +36,10 @@ public class spooky_hunt extends Application {
     // String bloody_banner_path = "/Spooky_Hunt/Hack_O_Ween/blood-drip.gif";
     String pumpkin2_path = "/Spooky_Hunt/Hack_O_Ween/pumpkin_2.gif";
     // String spikey_path = "/Spooky_Hunt/Hack_O_Ween/spikey.png";
-    String backdrop = "/Spooky_Hunt/Hack_O_Ween/backdrop.jpg";
+    String backdrop_path = "/Spooky_Hunt/Hack_O_Ween/backdrop.jpg";
 
     static Scene congratsScene;
+    Font font= Font.loadFont(getClass().getResource("/Spooky_Hunt/Hack_O_Ween/SingleDay-Regular.ttf").toExternalForm(),24);
 
     static Vector<Question_Round> rounds = createQuestions();
 
@@ -47,6 +48,7 @@ public class spooky_hunt extends Application {
         spooky_hunt.stage = stage;
         startButton = new Button();
         startButton.setText("START");
+        startButton.setFont(font);
         startButton.setStyle("-fx-border-radius:100px;-fx-background-color:red;");
         startButton.setPrefWidth(200);
         startButton.setPrefHeight(80);
@@ -70,23 +72,13 @@ public class spooky_hunt extends Application {
         tmp.setAlignment(Pos.CENTER);
         total.setAlignment(Pos.CENTER);
 
-        BackgroundImage background = new BackgroundImage(
-            new Image(getClass().getResource(backdrop).toExternalForm()),
-                    BackgroundRepeat.NO_REPEAT,
-                    BackgroundRepeat.NO_REPEAT,
-                    BackgroundPosition.CENTER,
-                    new BackgroundSize(100, 100, true, true, false, true)
-                );
+        StackPane stackpain = new StackPane();
 
-
-        StackPane stack = new StackPane();
-        stack.setBackground(new Background(background));
-
-        stack.getChildren().addAll(tmp, cat_container);
+        stackpain.getChildren().addAll(tmp, cat_container);
         StackPane.setAlignment(cat_container, Pos.BOTTOM_RIGHT);
 
         starterPane = new BorderPane();
-        starterPane.setCenter(stack);
+        starterPane.setCenter(stackpain);
         // starterPane.setStyle("-fx-background-color:darkred;");
 
         startScene = new Scene(starterPane, 700,600);
@@ -97,8 +89,11 @@ public class spooky_hunt extends Application {
         });
 
         stage.setScene(startScene);
-        
+        stage.setResizable(false);
         stage.setTitle("Spooky_Hunt");
+        Image icon = new Image(getClass().getResource("/Spooky_Hunt/Hack_O_Ween/pumpkin_2.gif").toExternalForm());
+
+        stage.getIcons().add(icon);
         stage.show();
 
     }
@@ -133,9 +128,12 @@ public class spooky_hunt extends Application {
 
     public static Scene createCongratsScene(){
         Text flag = new Text("flame{neeee3rd!}");
+        Font font = Font.loadFont(spooky_hunt.class.getResource("/Spooky_Hunt/Hack_O_Ween/SingleDay-Regular.ttf").toExternalForm(), 30);
+        flag.setFont(font);
         VBox tempBox = new VBox(flag);
         tempBox.setAlignment(Pos.CENTER);
         BorderPane tempPage = new BorderPane(flag);
+        tempPage.setStyle("-fx-background-color:darkred;");
         Scene tmp = new Scene(tempPage,700,600);
 
         return tmp;
@@ -150,13 +148,14 @@ class Question_Round{
         private String color;
         private String spikey_path = "/Spooky_Hunt/Hack_O_Ween/spikey.png";
         private String bloody_banner_path = "/Spooky_Hunt/Hack_O_Ween/bloody_drip.png";
-        private String cute_gruntilda_path = "/Spooky_Hunt/Hack_O_Ween/pixel_art.png";
-        private String gruntilda_path = "/Spooky_Hunt/Hack_O_Ween/gruntilda.png";
-        private String michael_path = "/Spooky_Hunt/Hack_O_Ween/michael.png";
 
         private String carrie_backdrop = "/Spooky_Hunt/Hack_O_Ween/backdrop-blood.jpg";
         private String spikey_backdrop = "/Spooky_Hunt/Hack_O_Ween/spikey-background.jpg";
         private String jason_backdrop = "/Spooky_Hunt/Hack_O_Ween/crystal_lake.png";
+        private String salem_backdrop = "/Spooky_Hunt/Hack_O_Ween/salem.jpeg";
+        private String michael_back = "/Spooky_Hunt/Hack_O_Ween/michael_back.jpg";
+        private Font font= Font.loadFont(getClass().getResource("/Spooky_Hunt/Hack_O_Ween/SingleDay-Regular.ttf").toExternalForm(),24);
+
 
         Question_Round(int roundNum){
             this.roundNum=roundNum;
@@ -176,11 +175,14 @@ class Question_Round{
 
             Text questionArea = new Text(question);
             questionArea.setStyle("-fx-fill:#FFFFFF");
+            questionArea.setFont(font);
             TextField answerBox = new TextField();
             answerBox.setPrefWidth(300);
+            answerBox.setFont(font);
             answerBox.setStyle("-fx-background-color:#394F3F;-fx-text-fill:#000000;");
 
             Button submit = new Button("Submit");
+            submit.setFont(font);
             submit.setStyle("-fx-background-color:#2D5155;");
             submit.setOnAction(e->{
                 String inputText = answerBox.getText();
@@ -196,6 +198,9 @@ class Question_Round{
             Everything.setSpacing(20);
             Everything.setMaxHeight(Region.USE_PREF_SIZE);
             Everything.setMaxWidth(Region.USE_PREF_SIZE);
+            Everything.setStyle("-fx-background-color:#000000;-fx-border-radius:50px;-fx-border-color:black;-fx-border-width:2px;-fx-background-radius:50px");
+            Everything.setPadding(new Insets(25, 20, 25, 20));
+
 
             VBox decoration = new VBox();
             BorderPane inner = new BorderPane();
@@ -204,11 +209,16 @@ class Question_Round{
             switch(this.roundNum){
                 //myers
                 case 0:
-                    Image michaelImage = new Image(getClass().getResource(michael_path).toExternalForm());
-                    ImageView michael_view = new ImageView(michaelImage);
-                    michael_view.setFitHeight(350);
-                    michael_view.setFitWidth(700);
-                    decoration.getChildren().add(michael_view);
+
+                    BackgroundImage michael_background = new BackgroundImage(
+                        new Image(getClass().getResource(michael_back).toExternalForm()),
+                        BackgroundRepeat.NO_REPEAT,
+                        BackgroundRepeat.NO_REPEAT,
+                        BackgroundPosition.CENTER,
+                        new BackgroundSize(100, 100, true, true, false, true)
+                    );
+                    stack.setBackground(new Background(michael_background));
+
                     color = "-fx-background-color:#0c2a2d;";
                     stack.getChildren().addAll(decoration,Everything);
                     StackPane.setAlignment(decoration, Pos.TOP_CENTER);
@@ -216,23 +226,16 @@ class Question_Round{
                     StackPane.setMargin(Everything, new Insets(0, 0, 50, 0));
                     break;
                 case 1:
-                    Image gruntilda_image = new Image(getClass().getResource(gruntilda_path).toExternalForm());
-                    ImageView gruntilda_view = new ImageView(gruntilda_image);
-                    gruntilda_view.setFitHeight(300);
-                    gruntilda_view.setFitWidth(300);
-                    gruntilda_view.setPreserveRatio(true);
 
-                    Image cute_gruntilda = new Image(getClass().getResource(cute_gruntilda_path).toExternalForm());
-                    ImageView cute_gruntilda_view = new ImageView(cute_gruntilda);
-                    cute_gruntilda_view.setFitWidth(300);   
-                    cute_gruntilda_view.setFitHeight(200);    
-                    cute_gruntilda_view.setPreserveRatio(true);
+                    BackgroundImage salem_background = new BackgroundImage(
+                        new Image(getClass().getResource(salem_backdrop).toExternalForm()),
+                        BackgroundRepeat.NO_REPEAT,
+                        BackgroundRepeat.NO_REPEAT,
+                        BackgroundPosition.CENTER,
+                        new BackgroundSize(100, 100, true, true, false, true)
+                    );
+                    stack.setBackground(new Background(salem_background));
 
-                    HBox tmpor = new HBox(gruntilda_view);
-                    tmpor.setAlignment(Pos.CENTER);
-                    HBox.setHgrow(tmpor, Priority.NEVER);
-                    decoration.getChildren().add(tmpor);
-                    decoration.setAlignment(Pos.TOP_CENTER);
                     color="-fx-background-color:#2fa71c";
                     stack.getChildren().addAll(decoration,Everything);
                     StackPane.setAlignment(decoration, Pos.TOP_CENTER);
@@ -251,8 +254,6 @@ class Question_Round{
                     stack.setBackground(new Background(background));
                     stack.getChildren().addAll(decoration,Everything);
                     StackPane.setAlignment(decoration, Pos.TOP_CENTER);
-                    Everything.setPadding(new Insets(20, 20, 20, 20));
-                    Everything.setStyle("-fx-background-color:#000000;-fx-border-radius:50px;-fx-border-color:black;-fx-border-width:2px;-fx-background-radius:50px");
                     break;
                     //spikey
                 case 3:
@@ -275,8 +276,8 @@ class Question_Round{
                     StackPane.setAlignment(decoration, Pos.TOP_CENTER);
                     StackPane.setAlignment(Everything,Pos.BOTTOM_CENTER);
                     StackPane.setMargin(decoration, new Insets(0, 0, 200, 0));
-                    StackPane.setMargin(Everything, new Insets(0, 0, 50, 0));
-
+                    StackPane.setMargin(Everything, new Insets(0, 0, 20, 0));
+                    Everything.setSpacing(2);
                     break;
                     //carrie
                 case 4:
@@ -300,8 +301,6 @@ class Question_Round{
                     color="-fx-background-color:#4D4247;";
                     stack.getChildren().addAll(decoration,Everything);
                     StackPane.setAlignment(decoration, Pos.TOP_CENTER);
-                    Everything.setPadding(new Insets(20, 20, 20, 20));
-                    Everything.setStyle("-fx-background-color:#000000;-fx-border-radius:50px;-fx-border-color:black;-fx-border-width:2px;-fx-background-radius:50px");
                     break;
                 default:
                     color="-fx-background-color:pink;";
