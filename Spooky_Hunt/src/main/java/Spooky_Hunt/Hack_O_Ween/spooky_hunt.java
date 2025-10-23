@@ -1,5 +1,6 @@
 package Spooky_Hunt.Hack_O_Ween;
 
+import java.io.IOException;
 import java.util.Vector;
 
 import javafx.geometry.Insets;
@@ -39,7 +40,7 @@ public class spooky_hunt extends Application {
     String backdrop_path = "/Spooky_Hunt/Hack_O_Ween/backdrop.jpg";
 
     static Scene congratsScene;
-    Font font= Font.loadFont(getClass().getResource("/Spooky_Hunt/Hack_O_Ween/SingleDay-Regular.ttf").toExternalForm(),24);
+    Font font= Font.loadFont(getClass().getResourceAsStream("/Spooky_Hunt/Hack_O_Ween/SingleDay-Regular.ttf"),24);
 
     static Vector<Question_Round> rounds = createQuestions();
 
@@ -54,13 +55,13 @@ public class spooky_hunt extends Application {
         startButton.setPrefHeight(80);
 
 
-        Image pumpkin_cat = new Image(getClass().getResource(pumpkin1).toExternalForm());
+        Image pumpkin_cat = new Image(getClass().getResourceAsStream(pumpkin1));
         ImageView pumpkin_cat_view = new ImageView(pumpkin_cat);
         pumpkin_cat_view.setFitHeight(300);
         pumpkin_cat_view.setFitWidth(300);
         pumpkin_cat_view.setPreserveRatio(true);
 
-        Image banner = new Image(getClass().getResource(banner_path).toExternalForm());
+        Image banner = new Image(getClass().getResourceAsStream(banner_path));
         ImageView banner_view = new ImageView(banner);
 
         VBox tmp = new VBox(banner_view, startButton);
@@ -91,7 +92,7 @@ public class spooky_hunt extends Application {
         stage.setScene(startScene);
         stage.setResizable(false);
         stage.setTitle("Spooky_Hunt");
-        Image icon = new Image(getClass().getResource("/Spooky_Hunt/Hack_O_Ween/pumpkin_2.gif").toExternalForm());
+        Image icon = new Image(getClass().getResourceAsStream("/Spooky_Hunt/Hack_O_Ween/pumpkin_2.gif"));
 
         stage.getIcons().add(icon);
         stage.show();
@@ -99,7 +100,18 @@ public class spooky_hunt extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        // launch(args);
+         try {
+            launch(args);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Press Enter to exit...");
+            try {
+                System.in.read(); // pauses so you can read the error
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     public static Vector<Question_Round> createQuestions(){
@@ -128,7 +140,7 @@ public class spooky_hunt extends Application {
 
     public static Scene createCongratsScene(){
         Text flag = new Text("flame{neeee3rd!}");
-        Font font = Font.loadFont(spooky_hunt.class.getResource("/Spooky_Hunt/Hack_O_Ween/SingleDay-Regular.ttf").toExternalForm(), 30);
+        Font font = Font.loadFont(spooky_hunt.class.getResourceAsStream("/Spooky_Hunt/Hack_O_Ween/SingleDay-Regular.ttf"), 30);
         flag.setFont(font);
         VBox tempBox = new VBox(flag);
         tempBox.setAlignment(Pos.CENTER);
@@ -154,7 +166,7 @@ class Question_Round{
         private String jason_backdrop = "/Spooky_Hunt/Hack_O_Ween/crystal_lake.png";
         private String salem_backdrop = "/Spooky_Hunt/Hack_O_Ween/salem.jpeg";
         private String michael_back = "/Spooky_Hunt/Hack_O_Ween/michael_back.jpg";
-        private Font font= Font.loadFont(getClass().getResource("/Spooky_Hunt/Hack_O_Ween/SingleDay-Regular.ttf").toExternalForm(),24);
+        private Font font= Font.loadFont(getClass().getResourceAsStream("/Spooky_Hunt/Hack_O_Ween/SingleDay-Regular.ttf"),24);
 
 
         Question_Round(int roundNum){
@@ -211,7 +223,7 @@ class Question_Round{
                 case 0:
 
                     BackgroundImage michael_background = new BackgroundImage(
-                        new Image(getClass().getResource(michael_back).toExternalForm()),
+                        new Image(getClass().getResourceAsStream(michael_back)),
                         BackgroundRepeat.NO_REPEAT,
                         BackgroundRepeat.NO_REPEAT,
                         BackgroundPosition.CENTER,
@@ -228,7 +240,7 @@ class Question_Round{
                 case 1:
 
                     BackgroundImage salem_background = new BackgroundImage(
-                        new Image(getClass().getResource(salem_backdrop).toExternalForm()),
+                        new Image(getClass().getResourceAsStream(salem_backdrop)),
                         BackgroundRepeat.NO_REPEAT,
                         BackgroundRepeat.NO_REPEAT,
                         BackgroundPosition.CENTER,
@@ -245,7 +257,7 @@ class Question_Round{
                     //friday
                 case 2:
                     BackgroundImage background = new BackgroundImage(
-                        new Image(getClass().getResource(jason_backdrop).toExternalForm()),
+                        new Image(getClass().getResourceAsStream(jason_backdrop)),
                         BackgroundRepeat.NO_REPEAT,
                         BackgroundRepeat.NO_REPEAT,
                         BackgroundPosition.CENTER,
@@ -257,11 +269,11 @@ class Question_Round{
                     break;
                     //spikey
                 case 3:
-                    Image spikey_image = new Image(getClass().getResource(spikey_path).toExternalForm());
+                    Image spikey_image = new Image(getClass().getResourceAsStream(spikey_path));
                     ImageView spikey_view = new ImageView(spikey_image);
 
                     BackgroundImage spikey_background = new BackgroundImage(
-                        new Image(getClass().getResource(spikey_backdrop).toExternalForm()),
+                        new Image(getClass().getResourceAsStream(spikey_backdrop)),
                         BackgroundRepeat.NO_REPEAT,
                         BackgroundRepeat.NO_REPEAT,
                         BackgroundPosition.CENTER,
@@ -281,11 +293,11 @@ class Question_Round{
                     break;
                     //carrie
                 case 4:
-                    Image bloody_banner_image = new Image(getClass().getResource(bloody_banner_path).toExternalForm());
+                    Image bloody_banner_image = new Image(getClass().getResourceAsStream(bloody_banner_path));
                     ImageView bloody_banner_view = new ImageView(bloody_banner_image);
 
                     BackgroundImage carrie_background = new BackgroundImage(
-                        new Image(getClass().getResource(carrie_backdrop).toExternalForm()),
+                        new Image(getClass().getResourceAsStream(carrie_backdrop)),
                         BackgroundRepeat.NO_REPEAT,
                         BackgroundRepeat.NO_REPEAT,
                         BackgroundPosition.CENTER,
