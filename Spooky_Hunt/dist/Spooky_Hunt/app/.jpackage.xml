@@ -1,7 +1,0 @@
-<?xml version="1.0" ?>
-<jpackage-state version="24.0.2" platform="windows">
-  <app-version>1.0</app-version>
-  <main-launcher>Spooky_Hunt</main-launcher>
-  <main-class>Spooky_Hunt.Hack_O_Ween.spooky_hunt</main-class>
-  <signed>false</signed>
-  <app-store>false</app-store></jpackage-state>
