@@ -1,8 +1,12 @@
 {
   "name": "site",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "homepage": "https://capture-the-flame.github.io/Hack-O-Ween/",
+  "dependencies": {
+    "gh-pages": "^6.3.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.7.1"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -12,11 +16,6 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs",
-  "dependencies": {
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-router-dom": "^7.9.3"
-  },
   "devDependencies": {
     "@vitejs/plugin-react": "^5.0.4",
     "vite": "^7.1.9"
