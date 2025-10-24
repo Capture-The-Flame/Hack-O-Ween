@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Spooky Hunt</title>
+<link rel="icon" href="resources/pumpkin_2.gif">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Single+Day&display=swap" rel="stylesheet">
+
+<style>
+    html{
+                margin: 0;
+        font-family: "Single Day", cursive;
+        font-weight: 400;
+        font-style: normal;
+    }
+    body {
+        margin: 0;
+        font-family: "Single Day", cursive;
+        font-weight: 400;
+        font-style: normal;
+    }
+    #game-container {
+        font-family: inherit;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-size: cover;
+        background-position: center;
+        transition: background 0.5s ease-in-out;
+        color: white;
+    }
+    #banner {
+        width: 80%;
+        max-height: 100px;
+    }
+    #question-box {
+        font-family: inherit;
+        background-color: rgba(0,0,0,0.6);
+        padding: 20px;
+        border-radius: 15px;
+        margin-top: 20px;
+        text-align: center;
+    }
+    #answer {
+        font-family: inherit;
+        padding: 10px;
+        font-size: 16px;
+        margin: 10px 0;
+        width: 300px;
+    }
+    #submit-btn, #start-btn {
+        font-family: inherit;
+        padding: 15px 30px;
+        font-size: 18px;
+        background-color: red;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+    }
+    #question-image {
+        max-width: 300px;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+
+<div id="game-container">
+    <img id="banner" src="resources/banner.gif" alt="">
+
+    <button id="start-btn">START</button>
+
+    <div id="question-box" style="display:none;">
+        <p id="question-text"></p>
+        <input type="text" id="answer" placeholder="Type your answer">
+        <br>
+        <button id="submit-btn">Submit</button>
+    </div>
+
+    <img id="question-image" src="resources/pumpkin_1.gif" alt="">
+</div>
+
+<script>
+const rounds = [
+    {
+        question: "What town was Michael Myers from?",
+        answer: "Haddonfield",
+        banner:"banner",
+        image: "pumpkin_1.gif",
+        backdrop: "resources/michael_back.jpg"
+    },
+    {
+        question: "Where did the most famous witch trials occur?",
+        answer: "Salem",
+        banner:"banner",
+        image: "pumpkin_2.gif",
+        backdrop: "resources/salem.jpeg"
+    },
+    {
+        question: "Who was the killer in Friday the 13th?",
+        answer: "Pamela Voorhees",
+        banner:"banner",
+        image: "pumpkin_1.gif",
+        backdrop: "resources/crystal_lake.png"
+    },
+    {
+        question: "What's his name?",
+        answer: "Spikey",
+        banner:"banner",
+        image: "resources/spikey.png",
+        backdrop: "resources/spikey-background.jpg"
+    },
+    {
+        question: "How old was Carrie when she went on her rampage?",
+        answer: "16",
+        banner:"banner",
+        image: "pumpkin_2.gif",
+        backdrop: "resources/backdrop-blood.jpg"
+    }
+];
+
+let currentRound = 0;
+
+const startBtn = document.getElementById('start-btn');
+const banner = document.getElementById('banner');
+const questionBox = document.getElementById('question-box');
+const questionText = document.getElementById('question-text');
+const answerInput = document.getElementById('answer');
+const submitBtn = document.getElementById('submit-btn');
+const questionImage = document.getElementById('question-image');
+const gameContainer = document.getElementById('game-container');
+
+startBtn.addEventListener('click', () => {
+    startBtn.style.display = 'none';
+    questionBox.style.display = 'block';
+    loadRound(currentRound);
+});
+
+submitBtn.addEventListener('click', () => {
+    const input = answerInput.value.trim();
+    if(input.toLowerCase() === rounds[currentRound].answer.toLowerCase()) {
+        currentRound++;
+        if(currentRound < rounds.length) {
+            loadRound(currentRound);
+        } else {
+            showCongrats();
+        }
+    } else {
+        alert("Wrong answer! Try again.");
+    }
+});
+
+function loadRound(roundNum) {
+    const round = rounds[roundNum];
+    questionText.textContent = round.question;
+    answerInput.value = "";
+    questionImage.src = round.image;
+    banner.src = round.banner;
+    gameContainer.style.backgroundImage = `url('${round.backdrop}')`;
+}
+
+function showCongrats() {
+    questionBox.style.display = 'none';
+    questionImage.style.display = 'none';
+    const congrats = document.createElement('h1');
+    congrats.textContent = "flame{neeee3rd!}";
+    congrats.style.color = 'orange';
+    gameContainer.appendChild(congrats);
+    gameContainer.style.backgroundImage = ``;
+    gameContainer.style.backgroundColor = "black";
+}
+</script>
+
+</body>
+</html>
