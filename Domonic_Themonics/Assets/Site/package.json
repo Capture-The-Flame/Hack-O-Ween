@@ -1,6 +1,6 @@
 {
   "name": "site",
-  "homepage": "https://capture-the-flame.github.io/Hack-O-Ween/",
+  "homepage": "https://capture-the-flame.github.io/Hack-O-Ween/Domonic_Themonics/Assets/Site/",
   "dependencies": {
     "gh-pages": "^6.3.0",
     "react": "^19.1.1",
